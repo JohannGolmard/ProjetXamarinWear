@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetXamarinWear.UWP", "Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetXamarinWear.Android", "ProjetXamarinWear.Android\ProjetXamarinWear.Android.csproj", "{9C06D253-A588-429A-AB82-FC76073D4567}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetXamarinWear", "ProjetXamarinWear\ProjetXamarinWear.csproj", "{4B046255-03FA-4E97-9DDB-6D688F74494C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetXamarinWear", "ProjetXamarinWear\ProjetXamarinWear.csproj", "{4B046255-03FA-4E97-9DDB-6D688F74494C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,8 +22,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CF0D951A-FD06-4F9F-988E-A4F93D0E6CBE}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{CF0D951A-FD06-4F9F-988E-A4F93D0E6CBE}.Debug|Any CPU.Build.0 = Debug|x86
-		{CF0D951A-FD06-4F9F-988E-A4F93D0E6CBE}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{CF0D951A-FD06-4F9F-988E-A4F93D0E6CBE}.Debug|ARM.ActiveCfg = Debug|ARM
 		{CF0D951A-FD06-4F9F-988E-A4F93D0E6CBE}.Debug|ARM.Build.0 = Debug|ARM
 		{CF0D951A-FD06-4F9F-988E-A4F93D0E6CBE}.Debug|ARM.Deploy.0 = Debug|ARM

@@ -6,12 +6,14 @@
              mc:Ignorable="d"
              x:Class="ProjetXamarinWear.Views.AboutPage"
              xmlns:vm="clr-namespace:ProjetXamarinWear.ViewModels"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             xmlns:maps="clr-namespace:Syncfusion.SfMaps.XForms;assembly=Syncfusion.SfMaps.XForms"
+>
     
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#2196F3</Color>
@@ -19,7 +21,9 @@
             <Color x:Key="LightTextColor">#999999</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
-
-   
-    
+    <maps:SfMaps>
+        <maps:SfMaps.Layers>
+            <maps:ImageryLayer LayerType="OSM" ></maps:ImageryLayer>
+        </maps:SfMaps.Layers>
+    </maps:SfMaps>
 </ContentPage>
