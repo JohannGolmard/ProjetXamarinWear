@@ -5,13 +5,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ProjetXamarinWear.Views.ItemDetailPage"
-             Title="{Binding Title}">
+             Title="Message description ! ">
 
     <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Item.Text}" d:Text="Item name" FontSize="Small"/>
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Item.Description}" d:Text="Item description" FontSize="Small"/>
+        <Label Text="Id :" FontSize="Medium" />
+        <Label Text="{Binding Item.student_id}" d:Text="Item name" FontSize="Small"/>
+        <Label Text="Message :" FontSize="Medium" />
+        <Label Text="{Binding Item.student_message}" d:Text="Item description" FontSize="Small"/>
+
     </StackLayout>
+    
+    
     
 </ContentPage>

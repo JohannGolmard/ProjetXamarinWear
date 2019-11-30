@@ -4,9 +4,10 @@ namespace ProjetXamarinWear.Models
 {
     public class Item
     {
-        public string Id { get; set; }
-        public string Message { get; set; }
-        public double Longitude { get; set; }
-        public double Lattitude { get; set; }
+        public string id { get; set; }
+        public long student_id { get; set; }
+        public double gps_lat { get; set; }
+        public double gps_long { get; set; }
+        public string student_message { get; set; }
     }
 }

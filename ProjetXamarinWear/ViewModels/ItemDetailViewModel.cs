@@ -9,7 +9,7 @@ namespace ProjetXamarinWear.ViewModels
         public Item Item { get; set; }
         public ItemDetailViewModel(Item item = null)
         {
-            Title = item?.Message;
+            Title = item?.student_message;
             Item = item;
         }
     }

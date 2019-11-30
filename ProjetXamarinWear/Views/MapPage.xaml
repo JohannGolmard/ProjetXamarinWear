@@ -21,7 +21,7 @@
             <Color x:Key="LightTextColor">#999999</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <maps:SfMaps>
+    <maps:SfMaps x:Name="carte">
         <maps:SfMaps.Layers>
             <maps:ImageryLayer LayerType="OSM" ></maps:ImageryLayer>
         </maps:SfMaps.Layers>

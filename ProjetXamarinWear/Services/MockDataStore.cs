@@ -14,8 +14,7 @@ namespace ProjetXamarinWear.Services
         {
             items = new List<Item>()
             {
-                //new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Message = "Second item", Longitude=90.0584885,Lattitude=-59.5555477894}
+
             };
         }
 
@@ -28,7 +27,7 @@ namespace ProjetXamarinWear.Services
 
         public async Task<bool> UpdateItemAsync(Item item)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+            var oldItem = items.Where((Item arg) => arg.id == item.id).FirstOrDefault();
             items.Remove(oldItem);
             items.Add(item);
 
@@ -37,7 +36,7 @@ namespace ProjetXamarinWear.Services
 
         public async Task<bool> DeleteItemAsync(string id)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
+            var oldItem = items.Where((Item arg) => arg.id == id).FirstOrDefault();
             items.Remove(oldItem);
 
             return await Task.FromResult(true);
@@ -45,7 +44,7 @@ namespace ProjetXamarinWear.Services
 
         public async Task<Item> GetItemAsync(string id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(items.FirstOrDefault(s => s.id == id));
         }
 
         public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)

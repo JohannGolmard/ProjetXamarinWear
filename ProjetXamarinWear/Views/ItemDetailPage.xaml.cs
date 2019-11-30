@@ -5,6 +5,7 @@ using Xamarin.Forms.Xaml;
 
 using ProjetXamarinWear.Models;
 using ProjetXamarinWear.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace ProjetXamarinWear.Views
 {
@@ -18,7 +19,6 @@ namespace ProjetXamarinWear.Views
         public ItemDetailPage(ItemDetailViewModel viewModel)
         {
             InitializeComponent();
-
             BindingContext = this.viewModel = viewModel;
         }
 
@@ -28,8 +28,8 @@ namespace ProjetXamarinWear.Views
 
             var item = new Item
             {
-                Id = "Item 1",
-                Message = "This is an item description."
+                id = "Item 1",
+                student_message = "This is an item description."
             };
 
             viewModel = new ItemDetailViewModel(item);
