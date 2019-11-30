@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ProjetXamarinWear.Views.AboutPage"
+             x:Class="ProjetXamarinWear.Views.MapPage"
              xmlns:vm="clr-namespace:ProjetXamarinWear.ViewModels"
              NavigationPage.HasNavigationBar="False"
              xmlns:maps="clr-namespace:Syncfusion.SfMaps.XForms;assembly=Syncfusion.SfMaps.XForms"

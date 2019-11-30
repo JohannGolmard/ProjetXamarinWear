@@ -13,6 +13,7 @@ using ProjetXamarinWear.ViewModels;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace ProjetXamarinWear.Views
 {
@@ -28,9 +29,15 @@ namespace ProjetXamarinWear.Views
             InitializeComponent();
 
             BindingContext = viewModel = new ItemsViewModel();
-            viewModel.Items.Clear();
-
             GetData();
+            Device.StartTimer(TimeSpan.FromSeconds(30), () =>
+            {
+                var shouldTimerContinueWork = true;
+                GetData();
+                return shouldTimerContinueWork;
+            });
+
+           
         }
 
 
@@ -57,11 +64,10 @@ namespace ProjetXamarinWear.Views
         private void RefreshData(object sender, EventArgs e)
         {
 
-            viewModel.Items.Clear();
             GetData();
 
         }
-               
+
         private void GetData()
         {
 
@@ -75,10 +81,37 @@ namespace ProjetXamarinWear.Views
                 StreamReader sr = new StreamReader(stream);
                 string response = sr.ReadToEnd();
                 var listeMessage = JsonConvert.DeserializeObject<List<Item>>(response);
+                Boolean delete = true;
+                foreach (Item m in viewModel.Items.ToList())
+                {
+                    foreach (Item mm in listeMessage) {
+                        if (m.id == mm.id) {
+                            delete = false;
+                            break;                            
+                        }                            
+                    }
+                    if (delete)
+                        viewModel.Items.Remove(m);
+                    delete = true;
+                }
+
+                Boolean ajout = true;
                 foreach (Item m in listeMessage)
                 {
-                    viewModel.Items.Add(m);
+                    foreach (Item mm in viewModel.Items.ToList())
+                    {
+                        if (m.id == mm.id)
+                        {
+                            ajout = false;
+                            break;                            
+                        }
+                    }
+                    if (ajout)
+                        viewModel.Items.Insert(0, m);
+                    ajout = true;
                 }
+
+                
             }, null);
             
             
