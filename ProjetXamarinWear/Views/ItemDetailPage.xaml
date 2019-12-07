@@ -8,10 +8,40 @@
              Title="Message description ! ">
 
     <StackLayout Spacing="20" Padding="15">
+        <Button  x:Name="addF" IsVisible="true" Text="Ajouter au favoris !" Clicked="addFav" VerticalOptions="Start"/>
+        <Button  x:Name="removeF" IsVisible="false" Text="Supprimer des favoris !" Clicked="removeFav" VerticalOptions="Start"/>
         <Label Text="Id :" FontSize="Medium" />
         <Label Text="{Binding Item.student_id}" d:Text="Item name" FontSize="Small"/>
         <Label Text="Message :" FontSize="Medium" />
         <Label Text="{Binding Item.student_message}" d:Text="Item description" FontSize="Small"/>
+        <Label Text="Message du même utilisateur :" FontSize="Large" />
+        <ListView x:Name="ItemsListView"
+                ItemsSource="{Binding UserItems}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Personne id : " 
+                                  FontSize="16" />
+                                <Label Text="{Binding student_id}" 
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" />
+                            </StackLayout>
+                            <Label Text="Message " 
+                                  FontSize="16" />
+                            <Label Text="{Binding student_message}"                             
+                                LineBreakMode="TailTruncation"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </StackLayout>
     

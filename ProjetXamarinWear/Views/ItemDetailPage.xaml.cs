@@ -6,6 +6,9 @@ using Xamarin.Forms.Xaml;
 using ProjetXamarinWear.Models;
 using ProjetXamarinWear.ViewModels;
 using System.Collections.ObjectModel;
+using System.Linq;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace ProjetXamarinWear.Views
 {
@@ -15,25 +18,70 @@ namespace ProjetXamarinWear.Views
     public partial class ItemDetailPage : ContentPage
     {
         ItemDetailViewModel viewModel;
+        ItemsViewModel currentMessages;
 
-        public ItemDetailPage(ItemDetailViewModel viewModel)
+        public ItemDetailPage(ItemDetailViewModel viewModel, ItemsViewModel currentMessage)
         {
             InitializeComponent();
             BindingContext = this.viewModel = viewModel;
+
+            this.currentMessages = currentMessage;
+            testAlreadyOnFav(viewModel.Item.id,  this.currentMessages);
+
+            changeButton();
+
         }
 
-        public ItemDetailPage()
-        {
-            InitializeComponent();
-
-            var item = new Item
+        private void testAlreadyOnFav(string id, ItemsViewModel fav) {
+            viewModel.fav = false;
+            foreach (Item m in fav.Save.ToList())
             {
-                id = "Item 1",
-                student_message = "This is an item description."
-            };
+                if (m.id == id) {
+                    viewModel.fav = true;
+                    break;
+                }
+            }
 
-            viewModel = new ItemDetailViewModel(item);
-            BindingContext = viewModel;
+
         }
+
+        private void changeButton() {
+
+            if (!viewModel.fav)
+            {
+                addF.IsVisible = true;
+                removeF.IsVisible = false;
+            }
+            else
+            {
+                addF.IsVisible = false;
+                removeF.IsVisible = true;
+            }            
+        }
+
+
+        private void addFav(object sender, EventArgs e)
+        {
+            viewModel.fav = true;
+
+            currentMessages.Save.Add(viewModel.Item);
+
+            var json = JsonConvert.SerializeObject(currentMessages.Save);
+            /*File.WriteAllText("save", json);*/
+
+            changeButton();
+        }
+
+        private void removeFav(object sender, EventArgs e)
+        {
+            viewModel.fav = false;
+
+            currentMessages.Save.Remove(viewModel.Item);
+            var json = JsonConvert.SerializeObject(currentMessages.Save);
+            /*File.WriteAllText("save", json);*/
+
+            changeButton();
+        }
+
     }
 }

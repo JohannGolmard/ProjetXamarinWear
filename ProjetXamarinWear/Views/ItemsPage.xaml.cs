@@ -14,6 +14,7 @@ using System.Net;
 using System.IO;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Collections.ObjectModel;
 
 namespace ProjetXamarinWear.Views
 {
@@ -29,6 +30,13 @@ namespace ProjetXamarinWear.Views
             InitializeComponent();
 
             BindingContext = viewModel = new ItemsViewModel();
+
+/*            if (File.Exists("save"))
+            {
+                string json = File.ReadAllText("save");
+                viewModel.Save = JsonConvert.DeserializeObject<ObservableCollection<Item>>(json);
+            }*/
+
             GetData();
             Device.StartTimer(TimeSpan.FromSeconds(30), () =>
             {
@@ -47,10 +55,22 @@ namespace ProjetXamarinWear.Views
             if (item == null)
                 return;
 
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item, viewModel), viewModel));
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;
+        }
+
+        async void OnItemSelectedFav(object sender, SelectedItemChangedEventArgs args)
+        {
+            var item = args.SelectedItem as Item;
+            if (item == null)
+                return;
+
+            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item, viewModel), viewModel));
+
+            // Manually deselect item.
+            ItemsListViewFav.SelectedItem = null;
         }
 
         protected override void OnAppearing()
@@ -109,9 +129,8 @@ namespace ProjetXamarinWear.Views
                     if (ajout)
                         viewModel.Items.Insert(0, m);
                     ajout = true;
-                }
+                }               
 
-                
             }, null);
             
             
