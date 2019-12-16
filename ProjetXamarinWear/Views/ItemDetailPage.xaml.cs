@@ -76,6 +76,7 @@ namespace ProjetXamarinWear.Views
         {
             viewModel.fav = false;
 
+            currentMessages.Items.Remove(viewModel.Item);
             currentMessages.Save.Remove(viewModel.Item);
             var json = JsonConvert.SerializeObject(currentMessages.Save);
             /*File.WriteAllText("save", json);*/

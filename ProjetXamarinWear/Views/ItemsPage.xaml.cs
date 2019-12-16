@@ -56,26 +56,17 @@ namespace ProjetXamarinWear.Views
                 return;
 
             await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item, viewModel), viewModel));
-
+            
             // Manually deselect item.
             ItemsListView.SelectedItem = null;
         }
-
-        async void OnItemSelectedFav(object sender, SelectedItemChangedEventArgs args)
-        {
-            var item = args.SelectedItem as Item;
-            if (item == null)
-                return;
-
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item, viewModel), viewModel));
-
-            // Manually deselect item.
-            ItemsListViewFav.SelectedItem = null;
-        }
+               
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            GetData();
 
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
@@ -85,6 +76,39 @@ namespace ProjetXamarinWear.Views
         {
 
             GetData();
+
+        }
+
+        private void addFavori() {
+
+            
+
+            //On supprime de la liste les message en favoris pour les rajouter dans le top de la listview
+            if (viewModel.Save.ToList().Count() > 0)
+            {
+                Boolean delete = false;
+                foreach (Item m in viewModel.Items.ToList())
+                {
+                    foreach (Item mm in viewModel.Save.ToList())
+                    {
+                        if (m.id == mm.id)
+                        {
+                            delete = true;
+                            break;
+                        }
+                    }
+                    if (delete)
+                        viewModel.Items.Remove(m);
+                    delete = false;
+                }
+
+
+                foreach (Item m in viewModel.Save.ToList())
+                {
+                    m.color = "Orange";
+                    viewModel.Items.Insert(0, m);
+                }
+            }                 
 
         }
 
@@ -129,7 +153,9 @@ namespace ProjetXamarinWear.Views
                     if (ajout)
                         viewModel.Items.Insert(0, m);
                     ajout = true;
-                }               
+                }
+
+                addFavori();
 
             }, null);
             

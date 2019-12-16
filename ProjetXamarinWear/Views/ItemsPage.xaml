@@ -10,35 +10,6 @@
 
     <StackLayout>
         <Button Text="Rafraichir" Clicked="RefreshData" VerticalOptions="Start"/>
-        <ListView x:Name="ItemsListViewFav"
-                ItemsSource="{Binding Save}"
-                HasUnevenRows="true"
-                BackgroundColor="Azure"
-                ItemSelected="OnItemSelectedFav">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Personne id : " 
-                                  FontSize="16" />
-                                <Label Text="{Binding student_id}" 
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                            </StackLayout>
-                            <Label Text="Message " 
-                                  FontSize="16" />
-                            <Label Text="{Binding student_message}"                             
-                                LineBreakMode="TailTruncation"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
         <ListView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"
@@ -47,7 +18,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Padding="10">
+                        <StackLayout Padding="10" BackgroundColor="{Binding color}">
                             <StackLayout Orientation="Horizontal">
                             <Label Text="Personne id : " 
                                   FontSize="16" />
