@@ -15,6 +15,8 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Collections.ObjectModel;
+using Akavache;
+using System.Reactive.Linq;
 
 namespace ProjetXamarinWear.Views
 {
@@ -29,15 +31,15 @@ namespace ProjetXamarinWear.Views
         {
             InitializeComponent();
 
+            BlobCache.ApplicationName = "BDD";
+            BlobCache.EnsureInitialized();
+            Registrations.Start("BDD");
+
             BindingContext = viewModel = new ItemsViewModel();
 
-/*            if (File.Exists("save"))
-            {
-                string json = File.ReadAllText("save");
-                viewModel.Save = JsonConvert.DeserializeObject<ObservableCollection<Item>>(json);
-            }*/
-
+            getDataInBDD();
             GetData();
+
             Device.StartTimer(TimeSpan.FromSeconds(30), () =>
             {
                 var shouldTimerContinueWork = true;
@@ -48,6 +50,16 @@ namespace ProjetXamarinWear.Views
            
         }
 
+
+        async void getDataInBDD() {
+            try
+            {
+                ObservableCollection<Item> data = await BlobCache.UserAccount.GetObject<ObservableCollection<Item>>("fav");
+                viewModel.Save = data;
+            }catch (KeyNotFoundException ex) {
+                Console.WriteLine("Pas de key Fav donc pas de favoris.");
+            }
+        }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {

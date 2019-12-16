@@ -10,6 +10,9 @@ using System.Linq;
 using Newtonsoft.Json;
 using System.IO;
 
+using Akavache;
+using System.Reactive.Linq;
+
 namespace ProjetXamarinWear.Views
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
@@ -60,14 +63,17 @@ namespace ProjetXamarinWear.Views
         }
 
 
+        async void store() {
+            await BlobCache.UserAccount.InsertObject("fav", currentMessages.Save);
+        }
+
         private void addFav(object sender, EventArgs e)
         {
             viewModel.fav = true;
 
             currentMessages.Save.Add(viewModel.Item);
 
-            var json = JsonConvert.SerializeObject(currentMessages.Save);
-            /*File.WriteAllText("save", json);*/
+            store();
 
             changeButton();
         }
@@ -78,8 +84,8 @@ namespace ProjetXamarinWear.Views
 
             currentMessages.Items.Remove(viewModel.Item);
             currentMessages.Save.Remove(viewModel.Item);
-            var json = JsonConvert.SerializeObject(currentMessages.Save);
-            /*File.WriteAllText("save", json);*/
+
+            store();
 
             changeButton();
         }

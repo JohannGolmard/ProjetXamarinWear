@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ProjetXamarinWear.Services;
 using ProjetXamarinWear.Views;
+using Akavache;
 
 namespace ProjetXamarinWear
 {
@@ -31,5 +32,7 @@ namespace ProjetXamarinWear
         {
             // Handle when your app resumes
         }
+
+
     }
 }
