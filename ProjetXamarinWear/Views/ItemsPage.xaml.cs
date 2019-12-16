@@ -66,10 +66,10 @@ namespace ProjetXamarinWear.Views
         {
             base.OnAppearing();
 
-            GetData();
-
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
+            else
+                GetData();
         }
 
         private void RefreshData(object sender, EventArgs e)
@@ -108,7 +108,7 @@ namespace ProjetXamarinWear.Views
                     m.color = "Orange";
                     viewModel.Items.Insert(0, m);
                 }
-            }                 
+            }               
 
         }
 
