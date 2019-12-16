@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -43,6 +44,8 @@ namespace ProjetXamarinWear.UWP
 
             Frame rootFrame = Window.Current.Content as Frame;
 
+
+
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)
@@ -52,7 +55,14 @@ namespace ProjetXamarinWear.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                Xamarin.Forms.Forms.Init(e);
+                // Add `using System.Reflection;`
+                List<Assembly> assembliesToInclude = new List<Assembly>();
+
+                // Now, add all the assemblies your app uses                 
+                assembliesToInclude.Add(typeof(Syncfusion.SfMaps.XForms.UWP.SfMapsRenderer).GetTypeInfo().Assembly);
+
+                // Replaces Xamarin.Forms.Forms.Init(e);        
+                Xamarin.Forms.Forms.Init(e, assembliesToInclude);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
