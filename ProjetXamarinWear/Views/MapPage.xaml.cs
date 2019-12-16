@@ -66,13 +66,21 @@ namespace ProjetXamarinWear.Views
                     {
                         foreach (MapMarker marker in map.Layers[0].Markers.ToList())
                         {
-                            if (marker.Label == m.student_message && marker.Latitude == m.gps_lat.ToString() && marker.Longitude == m.gps_long.ToString()) { 
-                                map.Layers[0].Markers.Remove(marker);
+                            if (marker.Label == m.student_message && marker.Latitude == m.gps_lat.ToString() && marker.Longitude == m.gps_long.ToString()) {
+                                Device.BeginInvokeOnMainThread(() =>
+                                {
+                                    map.Layers[0].Markers.Remove(marker);
+                                });
+                                
                                 break;
                             }
                         }  
                     }
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
                         viewModel.Items.Remove(m);
+                    });
+                    
                     delete = true;
                 }
 
@@ -93,12 +101,16 @@ namespace ProjetXamarinWear.Views
                         marker.Label = m.student_message;
                         marker.Latitude = m.gps_lat.ToString();
                         marker.Longitude = m.gps_long.ToString();
-                        map.Layers[0].Markers.Add(marker);
+
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            map.Layers[0].Markers.Add(marker);
+                        });
+
                     }
                     ajout = true;
                 }
-
-
+                
             }, null);
 
 

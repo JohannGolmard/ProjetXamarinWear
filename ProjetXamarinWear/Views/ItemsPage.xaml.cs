@@ -109,8 +109,13 @@ namespace ProjetXamarinWear.Views
                             break;
                         }
                     }
-                    if (delete)
-                        viewModel.Items.Remove(m);
+                    if (delete) {
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            viewModel.Items.Remove(m);
+                        });
+                    }
+                        
                     delete = false;
                 }
 
@@ -118,7 +123,12 @@ namespace ProjetXamarinWear.Views
                 foreach (Item m in viewModel.Save.ToList())
                 {
                     m.color = "Orange";
-                    viewModel.Items.Insert(0, m);
+
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        viewModel.Items.Insert(0, m);
+                    });
+                    
                 }
             }               
 
@@ -146,8 +156,13 @@ namespace ProjetXamarinWear.Views
                             break;                            
                         }                            
                     }
-                    if (delete)
-                        viewModel.Items.Remove(m);
+                    if (delete) {
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            viewModel.Items.Remove(m);
+                        });
+                    }
+                        
                     delete = true;
                 }
 
@@ -162,8 +177,15 @@ namespace ProjetXamarinWear.Views
                             break;                            
                         }
                     }
-                    if (ajout)
-                        viewModel.Items.Insert(0, m);
+                    if (ajout) {
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            viewModel.Items.Insert(0, m);
+                        });
+                    }
+                        
+
+
                     ajout = true;
                 }
 
